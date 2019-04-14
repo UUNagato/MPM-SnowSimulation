@@ -48,6 +48,21 @@
     <ClCompile Include="src\renderer\camera.cpp">
       <Filter>源文件\renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderer\sphere.cpp">
+      <Filter>源文件\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\shader.cpp">
+      <Filter>源文件\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pbrtTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\skybox.cpp">
+      <Filter>源文件\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\cube.cpp">
+      <Filter>源文件\renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\renderer\renderer.h">
@@ -80,12 +95,48 @@
     <ClInclude Include="include\renderer\camera.h">
       <Filter>头文件\renderer</Filter>
     </ClInclude>
+    <ClInclude Include="include\renderer\sphere.h">
+      <Filter>头文件\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\material.h">
+      <Filter>头文件\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\shader.h">
+      <Filter>头文件\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\skybox.h">
+      <Filter>头文件\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\cube.h">
+      <Filter>头文件\renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\vs.glsl">
       <Filter>源文件\shader</Filter>
     </None>
     <None Include="Shader\ps.glsl">
+      <Filter>源文件\shader</Filter>
+    </None>
+    <None Include="Shader\equirectangular_frag.glsl">
+      <Filter>源文件\shader</Filter>
+    </None>
+    <None Include="Shader\equirectangular_vertex.glsl">
+      <Filter>源文件\shader</Filter>
+    </None>
+    <None Include="Shader\background.vs">
+      <Filter>源文件\shader</Filter>
+    </None>
+    <None Include="Shader\background.fs">
+      <Filter>源文件\shader</Filter>
+    </None>
+    <None Include="Shader\pbrFragment.glsl">
+      <Filter>源文件\shader</Filter>
+    </None>
+    <None Include="Shader\pbrVertex.glsl">
+      <Filter>源文件\shader</Filter>
+    </None>
+    <None Include="Shader\iblpbrFragment.glsl">
       <Filter>源文件\shader</Filter>
     </None>
   </ItemGroup>

@@ -12,9 +12,15 @@ class Camera
 {
 public:
     Camera();
-    Camera(glm::vec3 &pos, glm::vec3 &direction);
+    // Camera(glm::vec3 &pos);
 
     void lookAt(const glm::vec3 &pos);
+    void setPosition(const glm::vec3 &pos);
+    void setPosition(float x, float y, float z);
+
+    glm::vec3 getPosition() { return cameraPos; }
+
+    glm::mat4 getViewMatrix();
 
 protected:
     glm::vec3 cameraPos;

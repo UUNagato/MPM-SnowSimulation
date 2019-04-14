@@ -143,10 +143,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="External\glad\glad.c" />
-    <ClCompile Include="src\exp.cpp" />
+    <ClCompile Include="src\exp.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\mpm.cpp" />
+    <ClCompile Include="src\pbrtTest.cpp" />
     <ClCompile Include="src\renderer.cpp" />
     <ClCompile Include="src\renderer\camera.cpp" />
+    <ClCompile Include="src\renderer\cube.cpp" />
+    <ClCompile Include="src\renderer\shader.cpp" />
+    <ClCompile Include="src\renderer\skybox.cpp" />
+    <ClCompile Include="src\renderer\sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\common\math.h" />
@@ -158,9 +168,21 @@
     <ClInclude Include="include\mpm\QuadraticWeight.h" />
     <ClInclude Include="include\mpm\WeightKernel.h" />
     <ClInclude Include="include\renderer\camera.h" />
+    <ClInclude Include="include\renderer\cube.h" />
+    <ClInclude Include="include\renderer\material.h" />
     <ClInclude Include="include\renderer\renderer.h" />
+    <ClInclude Include="include\renderer\shader.h" />
+    <ClInclude Include="include\renderer\skybox.h" />
+    <ClInclude Include="include\renderer\sphere.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Shader\background.fs" />
+    <None Include="Shader\background.vs" />
+    <None Include="Shader\equirectangular_vertex.glsl" />
+    <None Include="Shader\equirectangular_frag.glsl" />
+    <None Include="Shader\iblpbrFragment.glsl" />
+    <None Include="Shader\pbrFragment.glsl" />
+    <None Include="Shader\pbrVertex.glsl" />
     <None Include="Shader\ps.glsl" />
     <None Include="Shader\vs.glsl" />
   </ItemGroup>

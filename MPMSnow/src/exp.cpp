@@ -12,6 +12,7 @@
 #include "renderer/renderer.h"
 
 using namespace G_NAMESPACE_NAME;
+
 int main()
 {
     MPM mpmsolver(80);
