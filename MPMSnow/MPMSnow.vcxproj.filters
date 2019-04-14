@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="源文件\glad">
+      <UniqueIdentifier>{bec4c1cc-b0e6-496a-9271-112570110623}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\shader">
+      <UniqueIdentifier>{50c2c666-c6d1-4eeb-9670-663728dda2cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\renderer">
+      <UniqueIdentifier>{d3026dd0-8659-4289-87b5-a13093b4ddfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\renderer">
+      <UniqueIdentifier>{8418457a-2cfa-440d-8eb8-3a7f93d66b4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\mpm">
+      <UniqueIdentifier>{9a4a2ce9-80d2-43a6-8670-7013d1dd82bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\common">
+      <UniqueIdentifier>{288a30a5-55b7-4ef5-97ff-52edc837ffe3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="External\glad\glad.c">
+      <Filter>源文件\glad</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mpm.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer.cpp">
+      <Filter>源文件\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\camera.cpp">
+      <Filter>源文件\renderer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\renderer\renderer.h">
+      <Filter>头文件\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\math.h">
+      <Filter>头文件\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\util.h">
+      <Filter>头文件\common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mpm\grid.h">
+      <Filter>头文件\mpm</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mpm\mpm.h">
+      <Filter>头文件\mpm</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mpm\mpmkernelbase.h">
+      <Filter>头文件\mpm</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mpm\particle.h">
+      <Filter>头文件\mpm</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mpm\QuadraticWeight.h">
+      <Filter>头文件\mpm</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mpm\WeightKernel.h">
+      <Filter>头文件\mpm</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\camera.h">
+      <Filter>头文件\renderer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader\vs.glsl">
+      <Filter>源文件\shader</Filter>
+    </None>
+    <None Include="Shader\ps.glsl">
+      <Filter>源文件\shader</Filter>
+    </None>
+  </ItemGroup>
+</Project>
