@@ -173,6 +173,27 @@ void Shader::setMaterial(const Material &mat) const
     setFloat("metallic", mat.metallic);
     setFloat("roughness", mat.roughness);
     setFloat("ao", mat.ao);
+
+    if (mat.albedoMap > 0) {
+        glActiveTexture(GL_TEXTURE3);
+        glBindTexture(GL_TEXTURE_2D, mat.albedoMap);
+    }
+    if (mat.normalMap > 0) {
+        glActiveTexture(GL_TEXTURE4);
+        glBindTexture(GL_TEXTURE_2D, mat.normalMap);
+    }
+    if (mat.metallicMap > 0) {
+        glActiveTexture(GL_TEXTURE5);
+        glBindTexture(GL_TEXTURE_2D, mat.metallicMap);
+    }
+    if (mat.roughnessMap > 0) {
+        glActiveTexture(GL_TEXTURE6);
+        glBindTexture(GL_TEXTURE_2D, mat.roughnessMap);
+    }
+    if (mat.aoMap > 0) {
+        glActiveTexture(GL_TEXTURE7);
+        glBindTexture(GL_TEXTURE_2D, mat.aoMap);
+    }
 }
 #pragma endregion
 

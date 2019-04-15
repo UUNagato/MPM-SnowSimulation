@@ -150,10 +150,17 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\mpm.cpp" />
-    <ClCompile Include="src\pbrtTest.cpp" />
+    <ClCompile Include="src\pbrtTest.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\renderer.cpp" />
     <ClCompile Include="src\renderer\camera.cpp" />
     <ClCompile Include="src\renderer\cube.cpp" />
+    <ClCompile Include="src\renderer\pbrDemon.cpp" />
+    <ClCompile Include="src\renderer\quad.cpp" />
     <ClCompile Include="src\renderer\shader.cpp" />
     <ClCompile Include="src\renderer\skybox.cpp" />
     <ClCompile Include="src\renderer\sphere.cpp" />
@@ -170,18 +177,27 @@
     <ClInclude Include="include\renderer\camera.h" />
     <ClInclude Include="include\renderer\cube.h" />
     <ClInclude Include="include\renderer\material.h" />
+    <ClInclude Include="include\renderer\quad.h" />
     <ClInclude Include="include\renderer\renderer.h" />
     <ClInclude Include="include\renderer\shader.h" />
     <ClInclude Include="include\renderer\skybox.h" />
     <ClInclude Include="include\renderer\sphere.h" />
+    <ClInclude Include="pbrCamera.h" />
+    <ClInclude Include="pbrShader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\background.fs" />
     <None Include="Shader\background.vs" />
-    <None Include="Shader\equirectangular_vertex.glsl" />
+    <None Include="Shader\cubebox_vertex.glsl" />
+    <None Include="Shader\defaultFragment.glsl" />
     <None Include="Shader\equirectangular_frag.glsl" />
     <None Include="Shader\iblpbrFragment.glsl" />
+    <None Include="Shader\ibl\brdflut.glsl" />
+    <None Include="Shader\ibl\brdflutfrag.glsl" />
+    <None Include="Shader\ibl\irradianceBaker.glsl" />
+    <None Include="Shader\ibl\prefilter.glsl" />
     <None Include="Shader\pbrFragment.glsl" />
+    <None Include="Shader\pbrFullFragment.glsl" />
     <None Include="Shader\pbrVertex.glsl" />
     <None Include="Shader\ps.glsl" />
     <None Include="Shader\vs.glsl" />

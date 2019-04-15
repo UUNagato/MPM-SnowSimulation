@@ -17,9 +17,19 @@ public:
     ~Skybox();
 
     uint getCubeMap() const { return envCubemap; }
+    uint getIrradianceMap() const { return irradianceMap; }
+    uint getPrefilterMap() const { return prefilterMap; }
+    uint getBRDFLUT() const { return brdfLUTTexture; }
 
 private:
     uint envCubemap;
+    uint irradianceMap;
+    uint prefilterMap;
+    uint brdfLUTTexture;
+
+    uint maxMipLevel;
+
+    void createCubeMap(int width, int height, uint &texture);
 };
 
 G_NAMESPACE_END

@@ -31,6 +31,9 @@
     <Filter Include="头文件\common">
       <UniqueIdentifier>{288a30a5-55b7-4ef5-97ff-52edc837ffe3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\shader\ibl">
+      <UniqueIdentifier>{6c8ec913-72fa-4a15-bd85-4f931c905be9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="External\glad\glad.c">
@@ -54,14 +57,20 @@
     <ClCompile Include="src\renderer\shader.cpp">
       <Filter>源文件\renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\pbrtTest.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="src\renderer\skybox.cpp">
       <Filter>源文件\renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\renderer\cube.cpp">
       <Filter>源文件\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\quad.cpp">
+      <Filter>源文件\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pbrtTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\pbrDemon.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +119,15 @@
     <ClInclude Include="include\renderer\cube.h">
       <Filter>头文件\renderer</Filter>
     </ClInclude>
+    <ClInclude Include="pbrCamera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="pbrShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\quad.h">
+      <Filter>头文件\renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\vs.glsl">
@@ -119,9 +137,6 @@
       <Filter>源文件\shader</Filter>
     </None>
     <None Include="Shader\equirectangular_frag.glsl">
-      <Filter>源文件\shader</Filter>
-    </None>
-    <None Include="Shader\equirectangular_vertex.glsl">
       <Filter>源文件\shader</Filter>
     </None>
     <None Include="Shader\background.vs">
@@ -137,6 +152,27 @@
       <Filter>源文件\shader</Filter>
     </None>
     <None Include="Shader\iblpbrFragment.glsl">
+      <Filter>源文件\shader</Filter>
+    </None>
+    <None Include="Shader\ibl\irradianceBaker.glsl">
+      <Filter>源文件\shader\ibl</Filter>
+    </None>
+    <None Include="Shader\ibl\prefilter.glsl">
+      <Filter>源文件\shader\ibl</Filter>
+    </None>
+    <None Include="Shader\ibl\brdflut.glsl">
+      <Filter>源文件\shader\ibl</Filter>
+    </None>
+    <None Include="Shader\ibl\brdflutfrag.glsl">
+      <Filter>源文件\shader\ibl</Filter>
+    </None>
+    <None Include="Shader\cubebox_vertex.glsl">
+      <Filter>源文件\shader</Filter>
+    </None>
+    <None Include="Shader\pbrFullFragment.glsl">
+      <Filter>源文件\shader</Filter>
+    </None>
+    <None Include="Shader\defaultFragment.glsl">
       <Filter>源文件\shader</Filter>
     </None>
   </ItemGroup>
