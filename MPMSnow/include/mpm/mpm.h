@@ -7,10 +7,11 @@
 #pragma once
 
 #include <vector>
-#include "../common/math.h"
-#include "mpmkernelbase.h"
-#include "particle.h"
-#include "grid.h"
+#include <common/math.h>
+#include <mpm/mpmkernelbase.h>
+#include <mpm/particle.h>
+#include <mpm/grid.h>
+#include <mpm/rigidbody.h>
 
 G_NAMESPACE_BEGIN
 
@@ -29,6 +30,7 @@ protected:
     real dt;
     uint grid_dim;              // grid dimension
     std::vector<Particle> particles;    // particles
+    std::vector<Rigidbody*> rigidbodies; // rigidbodies
     real particle_mass;                 // particle mass
     real particle_volume;               // particle volume
     Grid grid;
@@ -38,7 +40,7 @@ protected:
 
 public:
     // Constructor, default parameters are from paper.
-    MPM(uint d, real delta_time = 1e-5) :
+    MPM(uint d, real delta_time = 2e-5) :
         c_c(2.5e-2),
         c_s(7.5e-3),
         h_c(10),
@@ -62,43 +64,19 @@ public:
 
     void addObject(Vector3 pos);
 
+    void addCollideBody(Rigidbody *body, const Matrix4x4 &world);
+
     virtual ~MPM()
     {
+        // clear rigidbodies
+        for (Rigidbody *rig : rigidbodies)
+            delete rig;
+        rigidbodies.clear();
         MPMBase::~MPMBase();
     }
 
-    FORCE_INLINE real calculateWi(Particle &p, Vector3i &base_coord);
-
-    FORCE_INLINE Vector3 calculateWiF1(const Vector3 &x) {
-        Vector3 sqr, cub;
-        getSqrAndCub(x, sqr, cub);
-        return (Vector3::Constant(0.5).cwiseProduct(cub) - sqr + Vector3::Constant(0.66666f));
-    }
-
-    FORCE_INLINE Vector3 calculateWiF2(const Vector3 &x) {
-        Vector3 sqr, cub;
-        getSqrAndCub(x, sqr, cub);
-        return (Vector3::Constant(-1.0 / 6.0).cwiseProduct(cub) + sqr - 2.0 * x
-            + Vector3::Constant(1.33333f));
-    }
-
-    FORCE_INLINE Vector3 calculateDWi(const Vector3 &x) {
-        Vector3 ret;
-        for (int i = 0; i < 3; ++i) {
-            if (x[i] < 1) {
-                ret[i] = (1.5 * x[i] - 2.0) * x[i];
-            }
-            else if (x[i] < 2) {
-                ret[i] = (-0.5 * x[i] + 2.0) * x[i] - 2.0;
-            }
-            else {
-                ret[i] = 0;
-            }
-        }
-        return ret;
-    }
-
-    std::vector<Particle>& getParticles() { return particles; }
+    const std::vector<Particle>& getParticles() const { return particles; }
+    const std::vector<Rigidbody*>& getRigidBodies() const { return rigidbodies; }
 };
 
 G_NAMESPACE_END

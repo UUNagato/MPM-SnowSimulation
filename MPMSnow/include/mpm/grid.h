@@ -33,6 +33,16 @@ public:
         grids.resize(real_dimension.x() * real_dimension.y() * real_dimension.z());
     }
 
+    Grid() : dimension(Vector3u::Zero())
+    {}
+
+    void resize(Vector3u ndim)
+    {
+        real_dimension = ndim + Vector3u::Constant(2);
+        dimension = ndim;
+        grids.resize(real_dimension.x() * real_dimension.y() * real_dimension.z());
+    }
+
     GridUnit& operator() (int x, int y, int z)
     {
         x += 1;
@@ -46,6 +56,12 @@ public:
     void reset()
     {
         memset(grids.data(), 0, sizeof(GridUnit) * grids.size());
+    }
+
+    // Get dimension of Grid
+    Vector3u getDimension()
+    {
+        return dimension;
     }
 };
 

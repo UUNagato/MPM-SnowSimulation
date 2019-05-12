@@ -197,4 +197,16 @@ void Shader::setMaterial(const Material &mat) const
 }
 #pragma endregion
 
+void Shader::validate() const
+{
+    int success = 0;
+    glValidateProgram(m_program);
+    glGetProgramiv(m_program, GL_VALIDATE_STATUS, &success);
+    if (!success) {
+        char info[512];
+        glGetProgramInfoLog(m_program, 512, NULL, info);
+        std::cout << info << std::endl;
+    }
+}
+
 G_NAMESPACE_END

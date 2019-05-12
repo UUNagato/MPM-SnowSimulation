@@ -34,15 +34,27 @@
     <Filter Include="源文件\shader\ibl">
       <UniqueIdentifier>{6c8ec913-72fa-4a15-bd85-4f931c905be9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\shader\volumeRender">
+      <UniqueIdentifier>{26fc32fb-9502-4ba4-804f-1f82d2f1f253}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\shader\debug">
+      <UniqueIdentifier>{a788b46b-d3a1-436a-80a8-ef523cb3ce43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\io">
+      <UniqueIdentifier>{9f29168b-6fee-45a4-93a3-9acfc05ca301}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\io">
+      <UniqueIdentifier>{74bd5991-75af-4362-b97f-fd5455d40f12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\mpm">
+      <UniqueIdentifier>{f86209af-3af1-42d2-b9d4-d5fcb88869f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="External\glad\glad.c">
       <Filter>源文件\glad</Filter>
     </ClCompile>
     <ClCompile Include="src\exp.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mpm.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\renderer.cpp">
@@ -71,6 +83,36 @@
     </ClCompile>
     <ClCompile Include="src\renderer\pbrDemon.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\volumerenderer.cpp">
+      <Filter>源文件\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\volumeblock.cpp">
+      <Filter>源文件\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\snowRenderer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\debug\3dsampler.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\volumeregion.cpp">
+      <Filter>源文件\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\bgeoexporter.cpp">
+      <Filter>源文件\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\mpmrenderer.cpp">
+      <Filter>源文件\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mpm.cpp">
+      <Filter>源文件\mpm</Filter>
+    </ClCompile>
+    <ClCompile Include="rigidbody.cpp">
+      <Filter>源文件\mpm</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\disk.cpp">
+      <Filter>源文件\renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +170,30 @@
     <ClInclude Include="include\renderer\quad.h">
       <Filter>头文件\renderer</Filter>
     </ClInclude>
+    <ClInclude Include="include\renderer\volumerenderer.h">
+      <Filter>头文件\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\volumeblock.h">
+      <Filter>头文件\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\volumeregion.h">
+      <Filter>头文件\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\renderkernel.h">
+      <Filter>头文件\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\io\bgeoexporter.h">
+      <Filter>头文件\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mpm\rigidbody.h">
+      <Filter>头文件\mpm</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\mpmrenderer.h">
+      <Filter>头文件\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\disk.h">
+      <Filter>头文件\renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\vs.glsl">
@@ -173,6 +239,42 @@
       <Filter>源文件\shader</Filter>
     </None>
     <None Include="Shader\defaultFragment.glsl">
+      <Filter>源文件\shader</Filter>
+    </None>
+    <None Include="Shader\volume\objectspaceskip_vs.glsl">
+      <Filter>源文件\shader\volumeRender</Filter>
+    </None>
+    <None Include="Shader\volume\objectspaceskip_fs.glsl">
+      <Filter>源文件\shader\volumeRender</Filter>
+    </None>
+    <None Include="Shader\billboard.vs">
+      <Filter>源文件\shader</Filter>
+    </None>
+    <None Include="Shader\billboard.fs">
+      <Filter>源文件\shader</Filter>
+    </None>
+    <None Include="Shader\volume\snow_vs.glsl">
+      <Filter>源文件\shader\volumeRender</Filter>
+    </None>
+    <None Include="Shader\volume\snow_fs.glsl">
+      <Filter>源文件\shader\volumeRender</Filter>
+    </None>
+    <None Include="src\debug\3dsampler_fs.glsl">
+      <Filter>源文件\shader\debug</Filter>
+    </None>
+    <None Include="Shader\volume\snow_emission_fs.glsl">
+      <Filter>源文件\shader\volumeRender</Filter>
+    </None>
+    <None Include="Shader\volume\sampler3dtest.glsl">
+      <Filter>源文件\shader\volumeRender</Filter>
+    </None>
+    <None Include="Shader\volume\snow_singlescatter_fs.glsl">
+      <Filter>源文件\shader\volumeRender</Filter>
+    </None>
+    <None Include="Shader\basicparticle.vs">
+      <Filter>源文件\shader</Filter>
+    </None>
+    <None Include="Shader\basicparticle.fs">
       <Filter>源文件\shader</Filter>
     </None>
   </ItemGroup>

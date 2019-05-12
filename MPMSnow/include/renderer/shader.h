@@ -35,6 +35,9 @@ public:
 
     void setMaterial(const Material &mat) const;
 
+    // validate
+    void validate() const;
+
 protected:
     uint m_program;             // shader program
 };

@@ -1,7 +1,7 @@
 #include <vector>
 #include <glad/glad.h>
 #include <glm/glm.hpp>
-#include "renderer/sphere.h"
+#include <renderer/sphere.h>
 
 G_NAMESPACE_BEGIN
 

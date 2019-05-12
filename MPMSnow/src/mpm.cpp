@@ -1,6 +1,7 @@
-#include "mpm/mpm.h"
-#include "common/util.h"
-#include "mpm/QuadraticWeight.h"
+#include <iostream>
+#include <mpm/mpm.h>
+#include <common/util.h>
+#include <mpm/QuadraticWeight.h>
 #include <cmath>
 
 G_NAMESPACE_BEGIN
@@ -150,16 +151,24 @@ void MPM::advance()
 // APIC version
 void MPM::advance()
 {
+    // initialize volume
+    // firstStepCalculation();
+
     // reset grid
     grid.reset();
 
     // calculate mu and lambda
-    real mu0 = e0 / (2.0 * (1.0 + poisson));
-    real lambda0 = e0 * poisson / ((1 + poisson) * (1 - 2 * poisson));
+    real mu0 = e0 / (2_f * (1_f + poisson));
+    real lambda0 = e0 * poisson / ((1_f + poisson) * (1_f - 2_f * poisson));
+
+    // update rigidbodies
+    for (Rigidbody *body : rigidbodies) {
+        body->update(dt);
+    }
 
     // P2G, use quadratic spline
     for (Particle &p : particles) {
-        Vector3i base_coord = (p.pos * grid_inv_space - Vector3::Constant(0.5)).cast<int>();
+        Vector3i base_coord = (p.pos * grid_inv_space - Vector3::Constant(0.5_f)).cast<int>();
         Vector3 fx = p.pos * grid_inv_space - base_coord.cast<real>();
         QuadraticWeight w;
         w.calculateWeight(fx);      // calculate Wip
@@ -177,7 +186,7 @@ void MPM::advance()
         // directly calculate cauchy
         Matrix3x3 cauchy = (2.0 * mu * (p.fe - r) * p.fe.transpose()) + (lambda * (J - 1) * J * Matrix3x3::Identity());
         // force // calculate dwip with trilinear
-        Matrix3x3 force = -4.0 * grid_inv_space * grid_inv_space * particle_volume * cauchy;
+        Matrix3x3 force = -4.0 * grid_inv_space * grid_inv_space * p.volume * cauchy;
 
         for (int i = 0; i < 3; ++i)
             for (int j = 0; j < 3; ++j)
@@ -197,16 +206,27 @@ void MPM::advance()
             for (int k = 0; k < grid_dim; ++k) {
                 // normalize mass
                 GridUnit &g = grid(i, j, k);
-                if (g.mass > 0) {
+                if (g.mass > 0_f) {
                     g.velocity /= g.mass;                           // normalize velocity
-                    g.velocity += dt * Vector3(0, 0, -200);         // gravity
+                    g.velocity += dt * Vector3(0_f, -980_f, 0_f);         // gravity
 
                     real boundary = 0.05, x = (real)i * grid_space, y = (real)j * grid_space,
                         z = (real)k * grid_space;
-                    if (ZOBoundary(x, boundary) || ZOBoundary(y, boundary) || z > 1 - boundary)
+                    if (ZOBoundary(x, boundary) || ZOBoundary(z, boundary) || y > 1_f - boundary)
                         g.velocity.setZero();                                   // sticky
-                    else if (z < boundary)
-                        g.velocity.z() = std::max(0.0, g.velocity.z());         // bounce
+                    else if (y < boundary) {
+                        // friction
+                        g.velocity(1) = 0_f;
+                        real floorDamp = 10_f;
+                        real speed = g.velocity.norm();
+                        real nextSpeed = clamp(speed - floorDamp, 0_f, speed);
+                        g.velocity *= (nextSpeed / speed);
+                    }
+
+                    // Grid Collision
+                    for (Rigidbody *body : rigidbodies) {
+                        body->interactWithGrid(Vector3(x, y, z), g, dt);
+                    }
                 }
                 else {
                     g.mass = 0;
@@ -256,6 +276,9 @@ void MPM::advance()
 
 void MPM::firstStepCalculation()
 {
+    if (!first_step)
+        return;
+
     grid.reset();
 
     // calculate mass
@@ -264,15 +287,15 @@ void MPM::firstStepCalculation()
         Vector3i basic_coord = (p.pos * grid_inv_space).cast<int>();
         Vector3 fx = (p.pos * grid_inv_space) - basic_coord.cast<real>();
         Vector3 one = Vector3::Ones();
-        Vector3 wi[4] = { calculateWiF2(fx + one), calculateWiF1(fx), calculateWiF1(one - fx),
-                        calculateWiF2(one - fx + one) };
+        QuadraticWeight w;
+        w.calculateWeight(fx);      // calculate Wip
 
         // Rasterize grid to particle
-        for (int i = -1; i < 3; ++i)
-            for (int j = -1; j < 3; ++j)
-                for (int k = -1; k < 3; ++k) {
+        for (int i = 0; i < 3; ++i)
+            for (int j = 0; j < 3; ++j)
+                for (int k = 0; k < 3; ++k) {
                     GridUnit &g = grid(basic_coord[0] + i, basic_coord[1] + j, basic_coord[2] + k);
-                    real wip = wi[i + 1].x() * wi[j + 1].y() * wi[k + 1].z();
+                    real wip = w.getWip(i, j, k);
                     g.mass += particle_mass * wip;
                 }
     }
@@ -283,37 +306,37 @@ void MPM::firstStepCalculation()
         // calculate Wip
         Vector3i basic_coord = (p.pos * grid_inv_space).cast<int>();
         Vector3 fx = (p.pos * grid_inv_space) - basic_coord.cast<real>();
-        Vector3 one = Vector3::Ones();
-        Vector3 wi[4] = { calculateWiF2(fx + one), calculateWiF1(fx), calculateWiF1(one - fx),
-                        calculateWiF2(one - fx + one) };
+        QuadraticWeight w;
+        w.calculateWeight(fx);      // calculate Wip
 
         // Rasterize grid to particle
         real particle_density = 0;
-        for (int i = -1; i < 3; ++i)
-            for (int j = -1; j < 3; ++j)
-                for (int k = -1; k < 3; ++k) {
+        for (int i = 0; i < 3; ++i)
+            for (int j = 0; j < 3; ++j)
+                for (int k = 0; k < 3; ++k) {
                     GridUnit &g = grid(basic_coord[0] + i, basic_coord[1] + j, basic_coord[2] + k);
-                    real wip = wi[i + 1].x() * wi[j + 1].y() * wi[k + 1].z();
+                    real wip = w.getWip(i, j, k);
                     particle_density += g.mass * wip;
                 }
         particle_density = particle_density * grid_inv_space * grid_inv_space * grid_inv_space;
-        // p.volume = particle_mass / particle_density;
+        p.volume = particle_mass / particle_density;
     }
+
+    first_step = false;
 }
 
 // Randomly generate particles in a cube
 void MPM::addObject(Vector3 pos)
 {
-    for (int i = 0; i < 500; ++i) {
-        particles.push_back(Particle(Vector3::Random() * 0.04 + pos));
+    for (int i = 0; i < 25000; ++i) {
+        particles.push_back(Particle(Vector3::Random() * 0.08_f + pos, grid_space * grid_space));
     }
 }
 
-real MPM::calculateWi(Particle &p, Vector3i &base_coord)
+void MPM::addCollideBody(Rigidbody *body, const Matrix4x4 &world)
 {
-    return 0;
-    // Here just use cubic B-splines
-
+    body->setLocalToWorld(world);
+    rigidbodies.push_back(body);
 }
 
 G_NAMESPACE_END

@@ -83,7 +83,7 @@ int main()
             glm::vec3(300.0f, 300.0f, 300.0f)
         };
 
-        Skybox cubemap("./resources/snow.hdr", window);
+        Skybox cubemap("./resources/newport_loft.hdr", window);
         Shader background("./Shader/background.vs", "./Shader/background.fs");
         background.use();
         background.setInt("environmentMap", 0);
